@@ -69,13 +69,15 @@
 <br>
 <table align="center">
   <tr>
-    <th>Currency ID</th>
-    <th>Currency Name</th>
+    <th>Currency ID From</th>
+    <th>Currency ID To</th>
+    <th>Rate</th>
   </tr>
 {{range .Data}}
   <tr>
-    <td>{{.ID}}</td>
-    <td>{{.Name}}</td>
+    <td>{{.CurrencyIDFrom}}</td>
+    <td>{{.CurrencyIDTo}}</td>
+    <td>{{.Rate}}</td>
   </tr>
 {{end}}
 </table>

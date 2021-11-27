@@ -11,3 +11,16 @@ type ConvertCurrencyResp struct {
 	RespDesc string      `json:"response_description"`
 	Data     interface{} `json:"data"`
 }
+
+type ConvertResultResp struct {
+	RespCode string `json:"response_code"`
+	RespDesc string `json:"response_description"`
+	Data     Data   `json:"data"`
+}
+
+type Data struct {
+	Amount         int `json:"amount"`
+	CurrencyIDFrom int `json:"currency_from"`
+	CurrencyIDTo   int `json:"currency_to"`
+	Result         int `json:"result"`
+}

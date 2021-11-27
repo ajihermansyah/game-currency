@@ -57,7 +57,7 @@
 </head>
 <body>
 <center>
-    <h2>List of Currency</h2>
+    <h2>Conversion Currency Result</h2>
     <ul>
         <li><a href="/">Create Currencies</a> |</li>
         <li><a href="/web/currency/list">List Currencies</a> |</li>
@@ -69,15 +69,18 @@
 <br>
 <table align="center">
   <tr>
-    <th>Currency ID</th>
-    <th>Currency Name</th>
+    <th>Currency ID From</th>
+    <th>Currency ID To</th>
+    <th>Amount</th>
   </tr>
-{{range .Data}}
   <tr>
-    <td>{{.ID}}</td>
-    <td>{{.Name}}</td>
+    <td>{{.CurrencyFrom}}</td>
+    <td>{{.CurrencyTo}}</td>
+    <td>{{.Amount}}</td>
   </tr>
-{{end}}
+</table>
+<br>
+<h2 style="margin-left: 25%;">Result : {{.Result}}</h2>
 </table>
 </body>
 </html>

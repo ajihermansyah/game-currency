@@ -126,7 +126,10 @@ func (cr ConversionController) Convert(w http.ResponseWriter, r *http.Request, p
 
 		//define response
 		response = models.ConvertCurrencyResp{"201", "success", map[string]int{
-			"result": result,
+			"currency_from": input.CurrencyIDFrom,
+			"currency_to":   input.CurrencyIDTo,
+			"amount":        input.Amount,
+			"result":        result,
 		}}
 	}
 
@@ -137,4 +140,20 @@ func (cr ConversionController) Convert(w http.ResponseWriter, r *http.Request, p
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(respCode)
 	fmt.Fprintf(w, "%s", uj)
+}
+
+func (cr ConversionController) GetListConversionRate(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	//Fetch data from model
+	conversions := models.GetAllConversionRate()
+
+	//define response
+	data := ConversionResp{"200", "success", conversions}
+
+	// Marshal provided interface into JSON structure
+	jm, _ := json.Marshal(data)
+
+	// Write content-type, statuscode, payload
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+	fmt.Fprintf(w, "%s", jm)
 }

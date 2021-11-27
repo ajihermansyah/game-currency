@@ -47,3 +47,20 @@ func GetConversionBy(from int, to int) (Conversion, error) {
 
 	return conversion, nil
 }
+
+func GetAllConversionRate() []Conversion {
+	rows, err := config.DB.Query("SELECT * FROM conversions")
+	checkErr(err)
+
+	defer rows.Close()
+
+	conversions := make([]Conversion, 0)
+	for rows.Next() {
+		conversion := Conversion{}
+		err := rows.Scan(&conversion.ID, &conversion.CurrencyIDFrom, &conversion.CurrencyIDTo, &conversion.Rate, &conversion.CreateAt, &conversion.UpdatedAt)
+		checkErr(err)
+
+		conversions = append(conversions, conversion)
+	}
+	return conversions
+}

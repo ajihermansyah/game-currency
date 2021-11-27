@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Currency</title>
+    <title>Create Currency Rate</title>
     <style>
         input[type=text], select {
             width: 40%;
@@ -46,22 +46,25 @@
 </style>
 </head>
 <body>
-
-<h1>Create Currency</h1>
-<ul>
-  <li><a href="/web/currency/list">Currencies</a></li>
-  <li><a href="#news">Add Conversion Rate</a></li>
-  <li><a href="#contact">List Conversion Rate</a></li>
-  <li><a href="#about">Convert Currency</a></li>
-</ul>
+<center>
+<h1>Create Currency Rate</h1>
+    <ul>
+        <li><a href="/">Create Currencies</a> |</li>
+        <li><a href="/web/currency/list">List Currencies</a> |</li>
+        <li><a href="/web/currency/rate/read">Create Conversion Rate</a> |</li>
+        <li><a href="/web/currency/rate/list">List Conversion Rate</a> |</li>
+        <li><a href="/web/currency/convert/read">Convert Currency</a> </li>
+    </ul>
+</center>
 <br>
-<form method="post" action="/web/currency/create">
-    <label for="fid">ID</label><br>
-    <input type="text" name="currency_id" placeholder="currency id" value="1"><br>
-    <label for="fname">Name</label><br>
-    <input type="text" name="currency_name" placeholder="currency name" required><br>
-    <input type="submit" style="margin-left:9%;">
-</form>
+<center>
+    <form method="post" action="/web/currency/rate/add">
+        <input type="text" name="currency_from" placeholder="Input currency from" required><br>
+        <input type="text" name="currency_to" placeholder="Input currency to" required><br>
+        <input type="text" name="currency_rate" placeholder="Input currency rate" required><br>
+        <input type="submit" center>
+    </form>
+</center>
 
 </body>
 </html>

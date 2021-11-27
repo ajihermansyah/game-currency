@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Currency Created</title>
+    <title>Create Currency</title>
     <style>
         input[type=text], select {
-            width: 100%;
+            width: 40%;
             padding: 12px 20px;
             margin: 8px 0;
             display: inline-block;
@@ -15,7 +15,7 @@
         }
 
         input[type=submit] {
-            width: 100%;
+            width: 20%;
             background-color: #4CAF50;
             color: white;
             padding: 14px 20px;
@@ -47,6 +47,7 @@
 </head>
 <body>
 <center>
+    <h1>Create Currency</h1>
     <ul>
         <li><a href="/">Create Currencies</a> |</li>
         <li><a href="/web/currency/list">List Currencies</a> |</li>
@@ -55,9 +56,14 @@
         <li><a href="/web/currency/convert/read">Convert Currency</a> </li>
     </ul>
 </center>
+<br>
+<center>
+    <form method="post" action="/web/currency/add">
+        <input type="text" name="currency_id" placeholder="Input currency id" required><br>
+        <input type="text" name="currency_name" placeholder="Input currency name" required><br>
+        <input type="submit" center>
+    </form>
+</center>
 
-<p>Input Currency Object</p>
-<p>RespStatus : {{.RespStatus}}</p><br />
-<p>RespBody : {{.RespBody}}</p>
 </body>
 </html>
