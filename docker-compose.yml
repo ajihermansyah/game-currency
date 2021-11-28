@@ -1,0 +1,42 @@
+version: "2"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/web/docker_file
+    container_name: app.dev
+    volumes:
+      - .:/go/src/game-currency
+    working_dir: /go/src/game-currency
+    command: go run main.go
+    ports:
+      - "1000:1000" # http
+    links:
+      - db
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 127.0.0.1:8080:8080
+  db:
+    build:
+      context: .
+      dockerfile: docker/db/docker_file
+    image: my-mysql:1.0
+    container_name: database.dev
+    hostname: database.dev
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: game_currency
+
+    # sync folders. MySQL data is stored outside container so that rebuilding doesn't clear db.
+    # folder is at workspace root.
+    volumes:
+      #- ../../_local_mysql_data:/var/lib/mysql
+      #- ./shopee.sql:/tmp/shopee.sql
+      #- ./import.sh:/tmp/import.sh
+      - ./mysql_init:/docker-entrypoint-initdb.d

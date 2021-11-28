@@ -11,7 +11,7 @@ var DB *sql.DB
 
 func init() {
 	var err error
-	DB, err = sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/game_currency?parseTime=true")
+	DB, err = sql.Open("mysql", "root:root@tcp(database.dev)/game_currency?parseTime=true")
 	checkErr(err)
 
 	fmt.Println("Database connected")
