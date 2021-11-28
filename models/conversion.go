@@ -2,8 +2,9 @@ package models
 
 import (
 	"database/sql"
-	"game-currency/config"
 	"time"
+
+	"github.com/ajihermansyah/game-currency/config"
 )
 
 type Conversion struct {

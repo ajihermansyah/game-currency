@@ -3,14 +3,15 @@ package controllers
 import (
 	"bytes"
 	"encoding/json"
-	"game-currency/models"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
 	"time"
 
-	"game-currency/config"
+	"github.com/ajihermansyah/game-currency/models"
+
+	"github.com/ajihermansyah/game-currency/config"
 
 	"github.com/julienschmidt/httprouter"
 )

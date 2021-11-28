@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"game-currency/models"
+	"github.com/ajihermansyah/game-currency/models"
 
 	"github.com/julienschmidt/httprouter"
 )

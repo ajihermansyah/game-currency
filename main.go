@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"game-currency/controllers"
+	"github.com/ajihermansyah/game-currency/controllers"
 
 	"github.com/julienschmidt/httprouter"
 )
