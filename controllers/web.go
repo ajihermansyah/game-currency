@@ -16,7 +16,7 @@ import (
 )
 
 type (
-	// TaxCodeController represents the controller for operating on the Tax Code resource
+	// WebController represents the controller for operating on web resource
 	WebController struct{}
 )
 
@@ -87,12 +87,24 @@ func (web WebController) CreateCurrencyProcess(w http.ResponseWriter, r *http.Re
 
 	body, _ := ioutil.ReadAll(resp.Body)
 
+	apiResp := models.APIResp{}
+	jsonErr := json.Unmarshal(body, &apiResp)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
+
+	respCode := apiResp.ResponseCode
+	respStatus := apiResp.ResponseStatus
+	message := apiResp.Message
+
 	data := struct {
+		RespCode   string
 		RespStatus string
-		RespBody   string
+		Message    string
 	}{
-		resp.Status,
-		string(body),
+		respCode,
+		respStatus,
+		message,
 	}
 
 	config.TPL.ExecuteTemplate(w, "created.gohtml", data)
@@ -146,18 +158,22 @@ func RequestGet(url string) []byte {
 func (web WebController) RenderCurrencyRate(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	var buffer bytes.Buffer
 	buffer.WriteString(string(development))
-	buffer.WriteString("api/game-currency/conversion")
+	buffer.WriteString("api/game-currency/currencies")
 	url := buffer.String()
 	body := RequestGet(url)
 
-	conversion := ConversionResp{}
-	jsonErr := json.Unmarshal(body, &conversion)
+	currency := CurrencyResp{}
+	jsonErr := json.Unmarshal(body, &currency)
 	if jsonErr != nil {
 		log.Fatal(jsonErr)
 	}
-	data := conversion.Data
+	data := currency.Data
 
-	config.TPL.ExecuteTemplate(w, "create_currency_rate.gohtml", data)
+	response := struct{ Data []models.Currency }{
+		data,
+	}
+
+	config.TPL.ExecuteTemplate(w, "create_currency_rate.gohtml", response)
 }
 
 func (web WebController) CreateCurrencyRateProcess(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
@@ -182,7 +198,7 @@ func (web WebController) CreateCurrencyRateProcess(w http.ResponseWriter, r *htt
 		log.Fatal(err)
 	}
 
-	//store new currency object
+	//store new conversion object
 	conversion := models.Conversion{}
 	conversion.CurrencyIDFrom = currencyFrom
 	conversion.CurrencyIDTo = currencyTo
@@ -209,12 +225,24 @@ func (web WebController) CreateCurrencyRateProcess(w http.ResponseWriter, r *htt
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 
+	apiResp := models.APIResp{}
+	jsonErr := json.Unmarshal(body, &apiResp)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
+
+	respCode := apiResp.ResponseCode
+	respStatus := apiResp.ResponseStatus
+	message := apiResp.Message
+
 	data := struct {
+		RespCode   string
 		RespStatus string
-		RespBody   string
+		Message    string
 	}{
-		resp.Status,
-		string(body),
+		respCode,
+		respStatus,
+		message,
 	}
 
 	config.TPL.ExecuteTemplate(w, "created.gohtml", data)
@@ -244,18 +272,22 @@ func (web WebController) ViewListAllCurrencyRate(w http.ResponseWriter, r *http.
 func (web WebController) RenderConvertCurrency(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	var buffer bytes.Buffer
 	buffer.WriteString(string(development))
-	buffer.WriteString("api/game-currency/conversion")
+	buffer.WriteString("api/game-currency/currencies")
 	url := buffer.String()
 	body := RequestGet(url)
 
-	convertResp := models.ConvertCurrencyResp{}
-	jsonErr := json.Unmarshal(body, &convertResp)
+	currency := CurrencyResp{}
+	jsonErr := json.Unmarshal(body, &currency)
 	if jsonErr != nil {
 		log.Fatal(jsonErr)
 	}
-	data := convertResp.Data
+	data := currency.Data
 
-	config.TPL.ExecuteTemplate(w, "convert_currency.gohtml", data)
+	response := struct{ Data []models.Currency }{
+		data,
+	}
+
+	config.TPL.ExecuteTemplate(w, "convert_currency.gohtml", response)
 }
 
 func (web WebController) ConvertCurrencyProcess(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
@@ -280,7 +312,7 @@ func (web WebController) ConvertCurrencyProcess(w http.ResponseWriter, r *http.R
 		log.Fatal(err)
 	}
 
-	//store new currency object
+	//store new conver currency object
 	convert := models.ConvertCurrency{}
 	convert.CurrencyIDFrom = currencyFrom
 	convert.CurrencyIDTo = currencyTo

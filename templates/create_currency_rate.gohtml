@@ -59,9 +59,17 @@
 <br>
 <center>
     <form method="post" action="/web/currency/rate/add">
-        <input type="text" name="currency_from" placeholder="Input currency from" required><br>
-        <input type="text" name="currency_to" placeholder="Input currency to" required><br>
-        <input type="text" name="currency_rate" placeholder="Input currency rate" required><br>
+        <select name="currency_from">
+            {{range .Data}}
+            <option value="{{.ID}}">  {{.ID}} - {{.Name}}</option>
+            {{end}}
+        </select><br>
+        <select name="currency_to">
+            {{range .Data}}
+            <option value="{{.ID}}">  {{.ID}} - {{.Name}}</option>
+            {{end}}
+        </select><br>
+        <input type="text" name="currency_rate" placeholder="Input currency rate" pattern="[0-9]+" title="input number only" required><br>
         <input type="submit" center>
     </form>
 </center>

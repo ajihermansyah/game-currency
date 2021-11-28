@@ -59,9 +59,17 @@
 <br>
 <center>
     <form method="post" action="/web/currency/convert/process">
-        <input type="text" name="currency_id_from" placeholder="Input currency from" required><br>
-        <input type="text" name="currency_id_to" placeholder="Input currency to" required><br>
-        <input type="text" name="amount" placeholder="Input amount" required><br>
+        <select name="currency_id_from">
+            {{range .Data}}
+            <option value="{{.ID}}">  {{.ID}} - {{.Name}}</option>
+            {{end}}
+        </select><br>
+        <select name="currency_id_to">
+            {{range .Data}}
+            <option value="{{.ID}}">  {{.ID}} - {{.Name}}</option>
+            {{end}}
+        </select><br>
+        <input type="text" name="amount" placeholder="Input amount" pattern="[0-9]+" title="input number only" required>&nbsp;<span id="errmsg"></span><br>
         <input type="submit" center>
     </form>
 </center>

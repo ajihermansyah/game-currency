@@ -17,15 +17,17 @@ type (
 )
 
 type ConversionResp struct {
-	RespCode string              `json:"response_code"`
-	RespDesc string              `json:"response_description"`
-	Data     []models.Conversion `json:"data"`
+	RespCode   string              `json:"response_code"`
+	RespStatus string              `json:"response_status"`
+	RespDesc   string              `json:"response_description"`
+	Data       []models.Conversion `json:"data"`
 }
 
 type CreateConversionResp struct {
-	RespCode string      `json:"response_code"`
-	RespDesc string      `json:"response_description"`
-	Data     interface{} `json:"data"`
+	RespCode   string      `json:"response_code"`
+	RespStatus string      `json:"response_status"`
+	RespDesc   string      `json:"response_description"`
+	Data       interface{} `json:"data"`
 }
 
 func NewConversionController() *ConversionController {
@@ -45,7 +47,7 @@ func (cr ConversionController) CreateConversion(w http.ResponseWriter, r *http.R
 	conversionData, err := models.GetConversionBy(conversion.CurrencyIDFrom, conversion.CurrencyIDTo)
 	if err != nil {
 		respCode = 400
-		d = CreateConversionResp{strconv.Itoa(respCode), err.Error(), nil}
+		d = CreateConversionResp{strconv.Itoa(respCode), "Bad Request", err.Error(), nil}
 		uj, _ := json.Marshal(d)
 
 		// Write content-type, statuscode, payload
@@ -58,7 +60,7 @@ func (cr ConversionController) CreateConversion(w http.ResponseWriter, r *http.R
 	if conversionData != (models.Conversion{}) {
 		respCode = 400
 		message := "conversion is already exist"
-		d = CreateConversionResp{strconv.Itoa(respCode), message, nil}
+		d = CreateConversionResp{strconv.Itoa(respCode), "Bad Request", message, nil}
 	} else {
 		respCode = 201
 
@@ -75,7 +77,7 @@ func (cr ConversionController) CreateConversion(w http.ResponseWriter, r *http.R
 		}
 
 		//define response
-		d = CreateConversionResp{"201", "success", result}
+		d = CreateConversionResp{"201", "Success", "Created success", result}
 	}
 
 	// Marshal provided interface into JSON structure
@@ -147,7 +149,7 @@ func (cr ConversionController) GetListConversionRate(w http.ResponseWriter, r *h
 	conversions := models.GetAllConversionRate()
 
 	//define response
-	data := ConversionResp{"200", "success", conversions}
+	data := ConversionResp{"200", "Success", "Get list conversion rate succesfully", conversions}
 
 	// Marshal provided interface into JSON structure
 	jm, _ := json.Marshal(data)

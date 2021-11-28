@@ -23,9 +23,10 @@ type CurrencyResp struct {
 }
 
 type CreateCurrencyResp struct {
-	RespCode string      `json:"response_code"`
-	RespDesc string      `json:"response_description"`
-	Data     interface{} `json:"data"`
+	RespCode   string      `json:"response_code"`
+	RespStatus string      `json:"response_status"`
+	RespDesc   string      `json:"response_description"`
+	Data       interface{} `json:"data"`
 }
 
 func NewCurrencyController() *CurrencyController {
@@ -63,7 +64,7 @@ func (cr CurrencyController) CreateCurrency(w http.ResponseWriter, r *http.Reque
 	if isExist {
 		respCode = 400
 		message := "currency with ID " + strconv.Itoa(currency.ID) + " is already exist"
-		d = CreateCurrencyResp{strconv.Itoa(respCode), message, nil}
+		d = CreateCurrencyResp{strconv.Itoa(respCode), "Bad Request", message, nil}
 	} else {
 		respCode = 201
 
@@ -74,7 +75,7 @@ func (cr CurrencyController) CreateCurrency(w http.ResponseWriter, r *http.Reque
 		}
 
 		//define response
-		d = CreateCurrencyResp{"201", "success", &currency}
+		d = CreateCurrencyResp{"201", "Success", "Created success", &currency}
 	}
 
 	// Marshal provided interface into JSON structure

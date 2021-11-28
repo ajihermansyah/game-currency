@@ -2,7 +2,6 @@ package models
 
 import (
 	"database/sql"
-	"fmt"
 	"game-currency/config"
 	"time"
 )
@@ -38,7 +37,6 @@ func GetConversionBy(from int, to int) (Conversion, error) {
 	err := row.Scan(&conversion.ID, &conversion.CurrencyIDFrom, &conversion.CurrencyIDTo, &conversion.Rate, &conversion.CreateAt, &conversion.UpdatedAt)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			fmt.Println("No Data ")
 			return conversion, nil
 		} else {
 			return conversion, err

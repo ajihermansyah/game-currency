@@ -59,7 +59,7 @@
 <br>
 <center>
     <form method="post" action="/web/currency/add">
-        <input type="text" name="currency_id" placeholder="Input currency id" required><br>
+        <input type="text" name="currency_id" placeholder="Input currency id" pattern="[0-9]+" title="input number only" required><br>
         <input type="text" name="currency_name" placeholder="Input currency name" required><br>
         <input type="submit" center>
     </form>
