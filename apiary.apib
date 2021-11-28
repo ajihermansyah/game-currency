@@ -1,0 +1,133 @@
+FORMAT: 1A
+HOST: http://game-currency.apiblueprint.org/
+
+# Game Currecy
+
+game-currency is a simple API for currency, currency rate and display convert currencies.
+
+## Currency Collection [/api/game-currency/currencies]
+
+### List All Currency [GET]
+
+Display all data currency
+
++ Response 200 (application/json)
+
+        {
+            "response_code": "200",
+            "response_description": "success",
+            "data": [
+                {
+                    "id": 1,
+                    "name": "Knut"
+                },
+                {
+                    "id": 2,
+                    "name": "Sickle"
+                },
+                {
+                    "id": 3,
+                    "name": "Galleon"
+                }
+            ]
+        }
+
+### Create Currency [POST]
+
+Create data currency, insert currency id, currency name process.
+
++ Request (application/json)
+
+        {
+            "id":1,
+            "name": "Knut"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "response_code": "200",
+            "response_description": "success",
+            "data": {
+                "id": 1,
+                "name": "Knut"
+            }
+        }
+        
+## Conversions Collection [/api/game-currency/conversion]
+
+### List All Conversion Currency [GET]
+
+Display all data conversion rate currency
+
++ Response 200 (application/json)
+
+        {
+            "response_code": "200",
+            "response_status": "Success",
+            "response_description": "Get list conversion rate succesfully",
+            "data": [
+                {
+                    "id": 16,
+                    "currency_id_from": 2,
+                    "currency_id_to": 1,
+                    "rate": 29,
+                    "CreateAt": null,
+                    "UpdatedAt": null
+                }
+            ]
+        }
+
+### Create Currency [POST]
+
+Create data conversion rate currency process.
+
++ Request (application/json)
+
+        {
+            "currency_id_from":2,
+            "currency_id_to": 1,
+            "rate": 29
+        }
+
++ Response 201 (application/json)
+
+        {
+            "response_code": "201",
+            "response_status": "Success",
+            "response_description": "Created success",
+            "data": {
+                "conversion_from": 1,
+                "conversion_to": 3,
+                "rate": 5
+            }
+        }
+        
+## Convert Currency Collection [/api/game-currency/convert]
+
+### Convert Currency [POST]
+
+For check convert currency process.
+
++ Request (application/json)
+
+        {
+            "currency_id_from":2,
+            "currency_id_to": 1,
+            "amount": 20
+        }
+
++ Response 201 (application/json)
+
+        {
+            "response_code": "201",
+            "response_description": "success",
+            "data": {
+                "amount": 20,
+                "currency_from": 2,
+                "currency_to": 1,
+                "result": 580
+            }
+        }
+
+
