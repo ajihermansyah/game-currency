@@ -1,7 +1,7 @@
 package models
 
 import (
-	"game-currency/config"
+	"github.com/ajihermansyah/game-currency/config"
 )
 
 type Currency struct {
