@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API Response</title>
+    <style>
+        html, body, p {
+            padding: 0;
+            border: 0;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: left;
+            height: 100vh;
+        }
+        p {
+            margin-left: 4rem;
+            font-size: 2rem;
+            color: black;
+          }
+        .link {
+            font-size: 1rem;
+        }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        div {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <h1>API Response</h1>
+    <ul>
+        <li><a href="/">Create Currencies</a> |</li>
+        <li><a href="/web/currency/list">List Currencies</a> |</li>
+        <li><a href="/web/currency/rate/read">Create Conversion Rate</a> |</li>
+        <li><a href="/web/currency/rate/list">List Conversion Rate</a> |</li>
+        <li><a href="/web/currency/convert/read">Convert Currency</a> </li>
+    </ul>
+</center>
+<br>
+<table align="center">
+  <tr>
+    <th>Response Code</th>
+    <th>Response Status</th>
+    <th>Message</th>
+  </tr>
+  <tr>
+    <td>{{.RespCode}}</td>
+    <td>{{.RespStatus}}</td>
+    <td>{{.Message}}</td>
+  </tr>
+</table>
+</table>
+</body>
+</html>
