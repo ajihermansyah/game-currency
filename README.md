@@ -10,7 +10,7 @@ at cur Collection [/order/{store_id}], Cart Collection [/cart], Tax Code Collect
 - [api/game-currency/convert] You can convert between currency [POST]
 
 
-See [API Documentation](https://github.com/ajiehermansyah/game-currency/blob/master/apiary.apib) on how to use it.
+See [API Documentation](https://github.com/ajihermansyah/game-currency/blob/master/apiary.apib) on how to use it.
 
 ## Directory Structure
 ```
@@ -47,6 +47,6 @@ game-currency
 
 **Steps**
 1. git clone [https://github.com/ajihermansyah/game-currency.git](https://github.com/ajihermansyah/game-currency.git)
-2. install docker and docker-compose 
-3. open terminal and run docker-compose build (service are build), docker-compose up(builds, recreates, attaches to container for service), docker-compose down (stop containers and remove containers etc) See [Docker Documentation](https://docs.docker.com/compose/reference/build/) on how to use it.
+2. Install docker and docker-compose 
+3. Open terminal and run docker-compose build (service are build), docker-compose up(builds, recreates, attaches to container for service), docker-compose down (stop containers and remove containers etc) See [Docker Documentation](https://docs.docker.com/compose/reference/build/) on how to use it.
 4. now your server ready for http:localhost:1000/

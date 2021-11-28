@@ -37,6 +37,6 @@ services:
     # folder is at workspace root.
     volumes:
       #- ../../_local_mysql_data:/var/lib/mysql
-      #- ./shopee.sql:/tmp/shopee.sql
+      #- ./game_currency.sql:/tmp/game_currency.sql
       #- ./import.sh:/tmp/import.sh
       - ./mysql_init:/docker-entrypoint-initdb.d
